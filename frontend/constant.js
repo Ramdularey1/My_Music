@@ -89,32 +89,58 @@ export const topSongCategory = [
 export const topalbum = [
     {
         id:1,
-        imageUrl:"./arjitbest.webp"
+        imageUrl:"./arjitbest.webp",
+        albumName: "Arjit Singh Best",
+        route: "/Arjit Singh",
+        categoryType: "singer",
+        categoryValue: "Arijit Singh"
     },
     {
         id:2,
-        imageUrl:"./bollybooddance.webp"
+        imageUrl:"./bollybooddance.webp",
+        albumName: "Bollywood Dance",
+        route: "/Top Music",
+        categoryType: "category",
+        categoryValue: "Top Music"
     },
     {
         id:3,
-        imageUrl:"./oldmusicreload.webp"
+        imageUrl:"./oldmusicreload.webp",
+        albumName: "Old Music",
+        route: "/oldmusic",
+        categoryType: "page",
+        categoryValue: "old"
     },
     {
         id:4,
-        imageUrl:"./solutemateretro.webp"
+        imageUrl:"./solutemateretro.webp",
+        albumName: "Romantic",
+        route: "/Romantic songs",
+        categoryType: "category",
+        categoryValue: "Romantic songs"
     },
     {
         id:5,
-        imageUrl:"./soulemate.webp"
+        imageUrl:"./soulemate.webp",
+        albumName: "Hindi Songs",
+        route: "/Hindi Song",
+        categoryType: "category",
+        categoryValue: "Hindi Song"
     },
     {
         id:6,
-        imageUrl:"./topstyleromance.webp"
+        imageUrl:"./topstyleromance.webp",
+        albumName: "English Songs",
+        route: "/English Song",
+        categoryType: "category",
+        categoryValue: "English Song"
     },
     {
         id:7,
-        imageUrl:"./topsummer.webp"
+        imageUrl:"./topsummer.webp",
+        albumName: "Punjabi Songs",
+        route: "/Punjabi songs",
+        categoryType: "category",
+        categoryValue: "Punjabi songs"
     },
-
-    
 ]

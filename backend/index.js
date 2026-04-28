@@ -40,11 +40,13 @@ app.get("/",(req, res) => {
 import userRoute from "./router/user.routes.js";
 import playlistRoute from "./router/playlist.routes.js";
 import { upload } from "./multer/multer.js";
+import { errorHandler } from "./middleware/error.middleware.js";
 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/playlists", playlistRoute);
 
-
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 connectDB().then(() => {
     app.listen(port, () => {

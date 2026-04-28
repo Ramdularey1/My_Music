@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import CarouselCard from './CarouselCard';
 import { topalbum } from '../../../constant';
@@ -45,6 +45,8 @@ function Carousel() {
             <CarouselCard
               key={items.id}
               url={items.imageUrl}
+              albumName={items.albumName}
+              route={items.route}
             />
           ))}
         </div>

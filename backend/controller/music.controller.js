@@ -1,6 +1,7 @@
 import Music from "../model/ music.model.js";
 import Category from "../model/category.model.js";
 import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import { upload } from "../multer/multer.js";
 
 
@@ -64,18 +65,14 @@ export const addMusic = async (req, res) => {
     }
 };
 
-export const getMusic = async (req,res) => {
-try {
+export const getMusic = asyncHandler(async (req,res) => {
     const data = await Music.find()
     if(!data){
         throw new ApiError(500, "Data does not fetch correctly")
     }
 
     return res.status(200).json({
-        data:data, Message:"Data fetch"
+        data:data, 
+        message:"Data fetched successfully"
     })
-} catch (error) {
-    console.log("error:", error)
-    return res.status(500).json({error:"Something went wrong while fetchimg data"})
-}
-}
+})
