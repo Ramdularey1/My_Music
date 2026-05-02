@@ -10,13 +10,9 @@ import { updateCurrentSong } from '../utils/currentMusicSlice';
 function PunjabiSong() {
   const dispatcher = useDispatch()
   const allSongs = useSelector(store => store.allSongs.allSongs);
-
- 
   const oldSongs = allSongs.filter((item) => {
     return item.category === "662a0fae916592ad3873e0af"
   })
-
-
   const [selectedMusic, setSelectedMusic] = useState(null);
   console.log(selectedMusic)
   const handlePlay = (items) => {
