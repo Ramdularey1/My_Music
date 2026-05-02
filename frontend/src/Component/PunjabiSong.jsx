@@ -4,9 +4,6 @@ import PlayingMusic from './PlayingMusic';
 import Music from './Music';
 import { updateCurrentSong } from '../utils/currentMusicSlice';
 
-
-
-
 function PunjabiSong() {
   const dispatcher = useDispatch()
   const allSongs = useSelector(store => store.allSongs.allSongs);
