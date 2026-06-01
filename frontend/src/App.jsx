@@ -43,6 +43,9 @@ import PlaylistsView from "./Component/Playlist/PlaylistsView";
 function AppContent() {
   const dispatch = useDispatch();
 
+  const withRootLayout = (page) => <RootLayout>{page}</RootLayout>;
+  const withAuthLayout = (page) => <AuthLayout>{page}</AuthLayout>;
+
   useEffect(() => {
     // Initialize auth state from localStorage
     const user = localStorage.getItem("user");
@@ -59,35 +62,31 @@ function AppContent() {
     <BrowserRouter>
       <MusicContainer/>
           <Routes>
-            <Route element={<RootLayout/>}>
-              <Route path="/" element={<Body />} />
-              <Route path="/allmusic" element={<AllMusic />} />
-              <Route path="/oldmusic" element={<OldMusic />} />
-              <Route path="/trendingsong" element={<Trending />} />
-              <Route path="/newsong" element={<NewSong />} />
-              <Route path="/topalbum" element={<TopAlbum />} />
-              <Route path="/playlists" element={<PlaylistsView />} />
-              <Route path="/Hindi Song" element={<HindiSong />} />
-              <Route path="/English Song" element={<EnglishSongs />} />
-              <Route path="/Spanish Song" element={<SpanishSong />} />
-              <Route path="/South Song" element={<SouthSong />} />
-              <Route path="/Motivational songs" element={<MotivationalSong />} />
-              <Route path="/Punjabi songs" element={<PunjabiSong />} />
-              <Route path="/Romantic songs" element={<RomanticSong />} />
-              <Route path="/Top Music" element={<TopMusic />} />
-              <Route path="/Arjit Singh" element={<ArjitSingh />} />
-              <Route path="/Udit Narayan" element={<UditNarayan />} />
-              <Route path="/Kumar Sanu" element={<KumarSanu />} />
-              <Route path="/Abhijeet Bhattacharya" element={<AbhijeetSong />} />
-              <Route path="/Krishnakumar Kunnath" element={<KkSong />} />
-              <Route path="/Yo Yo Honey Singh" element={<HoneySinghSong />} />
-              <Route path="/Badshah" element={<BadshahSong />} />
-            </Route>
+            <Route path="/" element={withRootLayout(<Body />)} />
+            <Route path="/allmusic" element={withRootLayout(<AllMusic />)} />
+            <Route path="/oldmusic" element={withRootLayout(<OldMusic />)} />
+            <Route path="/trendingsong" element={withRootLayout(<Trending />)} />
+            <Route path="/newsong" element={withRootLayout(<NewSong />)} />
+            <Route path="/topalbum" element={withRootLayout(<TopAlbum />)} />
+            <Route path="/playlists" element={withRootLayout(<PlaylistsView />)} />
+            <Route path="/Hindi Song" element={withRootLayout(<HindiSong />)} />
+            <Route path="/English Song" element={withRootLayout(<EnglishSongs />)} />
+            <Route path="/Spanish Song" element={withRootLayout(<SpanishSong />)} />
+            <Route path="/South Song" element={withRootLayout(<SouthSong />)} />
+            <Route path="/Motivational songs" element={withRootLayout(<MotivationalSong />)} />
+            <Route path="/Punjabi songs" element={withRootLayout(<PunjabiSong />)} />
+            <Route path="/Romantic songs" element={withRootLayout(<RomanticSong />)} />
+            <Route path="/Top Music" element={withRootLayout(<TopMusic />)} />
+            <Route path="/Arjit Singh" element={withRootLayout(<ArjitSingh />)} />
+            <Route path="/Udit Narayan" element={withRootLayout(<UditNarayan />)} />
+            <Route path="/Kumar Sanu" element={withRootLayout(<KumarSanu />)} />
+            <Route path="/Abhijeet Bhattacharya" element={withRootLayout(<AbhijeetSong />)} />
+            <Route path="/Krishnakumar Kunnath" element={withRootLayout(<KkSong />)} />
+            <Route path="/Yo Yo Honey Singh" element={withRootLayout(<HoneySinghSong />)} />
+            <Route path="/Badshah" element={withRootLayout(<BadshahSong />)} />
             
-            <Route element={<AuthLayout/>}>
-              <Route path="/auth" element={<Registration/>} />
-              <Route path="/login" element={<Login/>} />
-            </Route>
+            <Route path="/auth" element={withAuthLayout(<Registration/>)} />
+            <Route path="/login" element={withAuthLayout(<Login/>)} />
           </Routes> 
         
     </BrowserRouter>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { updateAllSongs } from '../utils/allSongsSlice';
 import { logout } from '../utils/authSlice';
+import { apiUrl } from '../utils/api';
 
 function NavBar() {
   const dispacher = useDispatch()
@@ -21,7 +22,7 @@ function NavBar() {
   useEffect(() => {
     const fetchSong = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/users/getmusic")
+        const response = await axios.get(apiUrl("/api/v1/users/getmusic"))
         dispacher(updateAllSongs(response.data.data));
       } catch (error) {
         console.log(error)
@@ -58,7 +59,7 @@ function NavBar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:8000/api/v1/users/logout", {
+      await fetch(apiUrl("/api/v1/users/logout"), {
         method: "POST",
         credentials: "include",
         headers: {
@@ -209,4 +210,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

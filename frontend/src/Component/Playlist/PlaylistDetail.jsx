@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatePlaylistInList } from '../../utils/playlistSlice';
 import { updateCurrentSong } from '../../utils/currentMusicSlice';
 import { MdArrowBack, MdDelete, MdAdd, MdPlayArrow } from 'react-icons/md';
+import { apiUrl } from '../../utils/api';
 
 function PlaylistDetail({ playlist, onBack, onRefresh }) {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function PlaylistDetail({ playlist, onBack, onRefresh }) {
     const handleAddSong = async (musicId) => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/add-song", {
+            const response = await fetch(apiUrl("/api/v1/playlists/add-song"), {
                 method: "POST",
                 credentials: "include",
                 headers: {
@@ -47,7 +48,7 @@ function PlaylistDetail({ playlist, onBack, onRefresh }) {
     const handleRemoveSong = async (musicId) => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/remove-song", {
+            const response = await fetch(apiUrl("/api/v1/playlists/remove-song"), {
                 method: "POST",
                 credentials: "include",
                 headers: {

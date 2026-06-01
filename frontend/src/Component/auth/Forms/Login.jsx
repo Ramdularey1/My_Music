@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser, setLoading, setError } from '../../../utils/authSlice';
+import { apiUrl } from '../../../utils/api';
 
 function Login() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Login() {
                 throw new Error("Please fill in all fields");
             }
 
-            const response = await fetch("http://localhost:8000/api/v1/users/login", {
+            const response = await fetch(apiUrl("/api/v1/users/login"), {
                 method: "POST",
                 credentials: "include",
                 headers: {

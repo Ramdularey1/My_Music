@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLoading, setError } from '../../../utils/authSlice';
+import { apiUrl } from '../../../utils/api';
 
 function Registration() {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ function Registration() {
                 throw new Error("Password must be at least 6 characters");
             }
 
-            const response = await fetch("http://localhost:8000/api/v1/users/register", {
+            const response = await fetch(apiUrl("/api/v1/users/register"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -4,6 +4,7 @@ import { setPlaylists, setCurrentPlaylist, removePlaylist, setLoading, setError 
 import { MdDelete, MdEdit } from 'react-icons/md';
 import CreatePlaylistModal from './CreatePlaylistModal';
 import PlaylistDetail from './PlaylistDetail';
+import { apiUrl } from '../../utils/api';
 
 function PlaylistsView() {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function PlaylistsView() {
     const fetchUserPlaylists = async () => {
         dispatch(setLoading(true));
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/my-playlists", {
+            const response = await fetch(apiUrl("/api/v1/playlists/my-playlists"), {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -47,7 +48,7 @@ function PlaylistsView() {
     const handleDeletePlaylist = async (playlistId) => {
         if (window.confirm("Are you sure you want to delete this playlist?")) {
             try {
-                const response = await fetch(`http://localhost:8000/api/v1/playlists/${playlistId}`, {
+                const response = await fetch(apiUrl(`/api/v1/playlists/${playlistId}`), {
                     method: "DELETE",
                     credentials: "include",
                     headers: {

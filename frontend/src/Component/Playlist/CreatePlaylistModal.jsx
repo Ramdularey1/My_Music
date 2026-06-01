@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPlaylist, setError } from '../../utils/playlistSlice';
 import { MdClose } from 'react-icons/md';
+import { apiUrl } from '../../utils/api';
 
 function CreatePlaylistModal({ isOpen, onClose }) {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function CreatePlaylistModal({ isOpen, onClose }) {
 
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/create", {
+            const response = await fetch(apiUrl("/api/v1/playlists/create"), {
                 method: "POST",
                 credentials: "include",
                 headers: {

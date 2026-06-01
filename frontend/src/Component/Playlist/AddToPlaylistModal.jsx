@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MdClose } from 'react-icons/md';
+import { apiUrl } from '../../utils/api';
 
 function AddToPlaylistModal({ isOpen, onClose, songId, songName }) {
     const [playlists, setPlaylists] = useState([]);
@@ -16,7 +17,7 @@ function AddToPlaylistModal({ isOpen, onClose, songId, songName }) {
     const fetchUserPlaylists = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/my-playlists", {
+            const response = await fetch(apiUrl("/api/v1/playlists/my-playlists"), {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -42,7 +43,7 @@ function AddToPlaylistModal({ isOpen, onClose, songId, songName }) {
     const handleAddToPlaylist = async (playlistId) => {
         setAddingTo(playlistId);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/playlists/add-song", {
+            const response = await fetch(apiUrl("/api/v1/playlists/add-song"), {
                 method: "POST",
                 credentials: "include",
                 headers: {

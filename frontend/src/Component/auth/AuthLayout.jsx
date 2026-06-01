@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-const AuthLayout = () => {
+const AuthLayout = ({ children }) => {
     const { isAuthenticated } = useSelector(state => state.auth);
     const user = localStorage.getItem("user");
 
@@ -9,8 +9,7 @@ const AuthLayout = () => {
         return <Navigate to={"/"} />
     }
     
-    return <Outlet />
+    return children || <Outlet />
 }
 
 export default AuthLayout
-
