@@ -20,6 +20,13 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
     }
 }
 
+const getCookieOptions = () => ({
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    maxAge: 24 * 60 * 60 * 1000
+});
+
 export const registerUser = asyncHandler(async (req, res, next) => {
     const { username, fullname, email, password } = req.body
     // console.log(req.body);
@@ -78,11 +85,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
-    const options = {
-        httpOnly: true,
-        secure: true, 
-        maxAge: 24 * 60 * 60 * 1000
-    }
+    const options = getCookieOptions();
     console.log(refreshToken);
 
     return res.status(200)
@@ -109,10 +112,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
         }
     )
 
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
+    const options = getCookieOptions();
 
     return res.status(200)
         .clearCookie("accessToken", options)
@@ -141,4 +141,3 @@ export const myFavoriteMusic = asyncHandler(async(req, res) => {
   
     return res.status(200).json({message:"Music added to favorites successfully"})
 })
-

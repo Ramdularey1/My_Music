@@ -5,7 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 export const verifyJWT = async (req, res, next) => {
     console.log(req.cookies);
     try {
-        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer", "")
+        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
         
         if (!token) {
@@ -25,7 +25,10 @@ export const verifyJWT = async (req, res, next) => {
         return next();
 
     } catch (error) {
-        return res.status(401).json(error?.message || "Invalid Access Token")
+        return res.status(401).json({
+            success: false,
+            message: error?.message || "Invalid Access Token"
+        })
     }
 
 }
