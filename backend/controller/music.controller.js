@@ -32,8 +32,9 @@ export const addMusic = async (req, res) => {
 
 
 
-                const musicImage = `http://localhost:${process.env.PORT}/${musicImageURL}`
-                const musicAudio = `http://localhost:${process.env.PORT}/${audiosongURL}`
+                const serverURL = process.env.SERVER_URL || "https://my-music-bice.vercel.app";
+                const musicImage = `${serverURL}/${musicImageURL}`
+                const musicAudio = `${serverURL}/${audiosongURL}`
 
                 // Check if categoryName is provided
                 if (!categoryName) {

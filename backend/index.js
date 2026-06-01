@@ -12,21 +12,25 @@ dotenv.config({
 })
 
 const port = process.env.PORT || 8000;
+const allowedOrigins = (process.env.CORS_ORIGIN || "https://my-music-bice.vercel.app")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
 const app = express()
 app.use('/uploads', express.static('uploads'));
 app.use(cookieParser())
 
-// app.use(cors({
-//     origin: process.env.CORS_ORIGIN,
-//     credentials: true
-// }))
-
 app.use(cors({
-         origin: "https://my-music-bice.vercel.app",
-         credentials: true
-     }))
-// http://localhost:5173
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error(`Origin ${origin} is not allowed by CORS`));
+    },
+    credentials: true
+}))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
