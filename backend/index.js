@@ -17,15 +17,15 @@ const app = express()
 app.use('/uploads', express.static('uploads'));
 app.use(cookieParser())
 
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}))
-
 // app.use(cors({
-//          origin: 'http://localhost:5173',
-//          credentials: true
-//      }))
+//     origin: process.env.CORS_ORIGIN,
+//     credentials: true
+// }))
+
+app.use(cors({
+         origin: "https://my-music-bice.vercel.app",
+         credentials: true
+     }))
 // http://localhost:5173
 
 app.use(express.json());
