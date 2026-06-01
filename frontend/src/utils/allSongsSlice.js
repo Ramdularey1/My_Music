@@ -26,7 +26,7 @@ const allSongsSlice = createSlice({
   },
   reducers: {
     updateAllSongs: (state, action) => {
-      state.allSongs = action.payload;
+      state.allSongs = Array.isArray(action.payload) ? action.payload : [];
     }
   }
 });

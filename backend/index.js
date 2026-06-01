@@ -12,16 +12,23 @@ dotenv.config({
 })
 
 const port = process.env.PORT || 8000;
-const allowedOrigins = (process.env.CORS_ORIGIN || "https://my-music-bice.vercel.app")
+const defaultAllowedOrigins = [
+    "https://my-music-bice.vercel.app",
+    "http://localhost:5173"
+];
+const allowedOrigins = [
+    ...defaultAllowedOrigins,
+    ...(process.env.CORS_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+];
 
 const app = express()
 app.use('/uploads', express.static('uploads'));
 app.use(cookieParser())
 
-app.use(cors({
+const corsOptions = {
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) {
             return callback(null, true);
@@ -29,8 +36,13 @@ app.use(cors({
 
         return callback(new Error(`Origin ${origin} is not allowed by CORS`));
     },
-    credentials: true
-}))
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions))
+app.options("*", cors(corsOptions))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
