@@ -32,7 +32,7 @@ export const addMusic = async (req, res) => {
 
 
 
-                const serverURL = process.env.SERVER_URL || "https://my-music-bice.vercel.app";
+                const serverURL = process.env.SERVER_URL || "https://music-web-sqpk.onrender.com";
                 const musicImage = `${serverURL}/${musicImageURL}`
                 const musicAudio = `${serverURL}/${audiosongURL}`
 
