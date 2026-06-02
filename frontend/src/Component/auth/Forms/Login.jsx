@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser, setLoading, setError } from '../../../utils/authSlice';
-import { apiUrl } from '../../../utils/api';
+import { apiUrl, getApiErrorMessage, parseApiResponse } from '../../../utils/api';
 
 function Login() {
     const navigate = useNavigate();
@@ -42,17 +42,17 @@ function Login() {
                 body: JSON.stringify(formData)
             });
 
-            const data = await response.json();
+            const data = await parseApiResponse(response);
 
             if (response.ok && data.data) {
                 dispatch(setUser(data.data));
                 localStorage.setItem("user", JSON.stringify(data.data));
                 navigate("/");
             } else {
-                throw new Error(data.message || "Login failed");
+                throw new Error(data.message || `Login failed (${response.status})`);
             }
         } catch (error) {
-            const errorMsg = error.message || "Error while logging in";
+            const errorMsg = getApiErrorMessage(error);
             setErrorMsg(errorMsg);
             dispatch(setError(errorMsg));
             console.log("Error:", error);

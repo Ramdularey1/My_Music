@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLoading, setError } from '../../../utils/authSlice';
-import { apiUrl } from '../../../utils/api';
+import { apiUrl, getApiErrorMessage, parseApiResponse } from '../../../utils/api';
 
 function Registration() {
     const navigate = useNavigate();
@@ -58,15 +58,15 @@ function Registration() {
                 })
             });
 
-            const data = await response.json();
+            const data = await parseApiResponse(response);
 
             if (response.ok && data.data) {
                 navigate("/login");
             } else {
-                throw new Error(data.message || "Registration failed");
+                throw new Error(data.message || `Registration failed (${response.status})`);
             }
         } catch (error) {
-            const errorMsg = error.message || "Error while registering user";
+            const errorMsg = getApiErrorMessage(error);
             setErrorMsg(errorMsg);
             dispatch(setError(errorMsg));
             console.log("Error:", error);
