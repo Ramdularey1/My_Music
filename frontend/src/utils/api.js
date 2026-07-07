@@ -18,7 +18,7 @@ export const parseApiResponse = async (response) => {
 
 export const getApiErrorMessage = (error) => {
   if (error instanceof TypeError) {
-    return "Cannot reach the backend. Check Render deployment and CORS settings.";
+    return "Cannot reach the backend. Check that Render is running, MONGODB_URI and token secrets are set, and CORS_ORIGIN allows this frontend.";
   }
 
   return error.message || "Something went wrong";

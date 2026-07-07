@@ -6,6 +6,9 @@ services:
     buildCommand: npm install
     startCommand: npm start
     envVars:
+      # Required on Render dashboard for the backend to start successfully.
+      # MONGODB_URI must point to your MongoDB connection string.
+      # ACCESS_TOKEN_SECRET and REFRESH_TOKEN_SECRET must be long random secrets.
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGIN
