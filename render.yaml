@@ -14,4 +14,4 @@ services:
       - key: CORS_ORIGIN
         value: https://my-music-bice.vercel.app
       - key: SERVER_URL
-        value: https://music-web-api.onrender.com
+        value: https://music-web-sqpk.onrender.com
