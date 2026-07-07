@@ -5,7 +5,7 @@ import path from 'path';
 import dotenv from "dotenv"
 import cors from "cors"
 import connectDB from "./db/index.js";
-import { getAllowedOrigins } from "./constant.js";
+import { isAllowedOrigin } from "./constant.js";
 
 
 dotenv.config({
@@ -20,9 +20,7 @@ app.use(cookieParser())
 
 const corsOptions = {
     origin: (origin, callback) => {
-        const allowedOrigins = getAllowedOrigins();
-        const cleanOrigin = origin ? origin.replace(/\/$/, "") : origin;
-        if (!cleanOrigin || allowedOrigins.includes(cleanOrigin)) {
+        if (isAllowedOrigin(origin)) {
             return callback(null, true);
         }
 

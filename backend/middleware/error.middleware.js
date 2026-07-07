@@ -1,5 +1,5 @@
 import { ApiError } from "../utils/ApiError.js";
-import { getAllowedOrigins } from "../constant.js";
+import { isAllowedOrigin } from "../constant.js";
 
 export const errorHandler = (err, req, res, next) => {
     let error = err;
@@ -10,13 +10,11 @@ export const errorHandler = (err, req, res, next) => {
 
     // Attach CORS headers if the request origin is allowed
     const origin = req.headers.origin;
-    if (origin) {
-        const allowedOrigins = getAllowedOrigins();
-        const cleanOrigin = origin.replace(/\/$/, "");
-        if (allowedOrigins.includes(cleanOrigin)) {
+    if (isAllowedOrigin(origin)) {
+        if (origin) {
             res.setHeader("Access-Control-Allow-Origin", origin);
-            res.setHeader("Access-Control-Allow-Credentials", "true");
         }
+        res.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
     return res.status(error.statusCode).json({
